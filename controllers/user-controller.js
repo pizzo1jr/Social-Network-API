@@ -67,7 +67,7 @@ const userController = {
     // POST add Friend 
     addFriend({ params }, res) {
         User.findOneAndUpdate(
-            { _id: params.userId },
+            { _id: params.Id },
             { $push: { friends: params.friendId } },
             { new: true }
         )
