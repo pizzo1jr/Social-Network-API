@@ -1,10 +1,10 @@
 const { User, Thought } = require('../models');
 
 const userController = {
-    
+
     // GET all users
     getAllUser(req,res) {
-        User.find([])
+        User.find({})
         .populate({
             path: 'thoughts',
             select: '-__v'
@@ -22,7 +22,7 @@ const userController = {
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
         .populate({
-            path: 'comments',
+            path: 'thoughts',
             select: '-__v'
         })
         .populate({
@@ -68,7 +68,7 @@ const userController = {
     addFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.userId },
-            { $push: { friends: params.freindId } },
+            { $push: { friends: params.friendId } },
             { new: true }
         )
             .then((dbUserData) => {
